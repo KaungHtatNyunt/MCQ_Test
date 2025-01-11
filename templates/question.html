@@ -1,0 +1,69 @@
+<!-- templates/question.html-->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Question {{.QuestionNum}}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="timer">Time Remaining: <span id="timer">{{.TimeLeft}}</span> seconds</div>
+  <h2>Question {{.QuestionNum}}</h2>
+  <p class="question-text">{{.Question.QuestionText}}</p>
+
+  <form id="questionForm">
+    {{range $index, $answer := .Answers}}
+    <div class="answer-option">
+      <input type="radio" name="answer" value="{{$index}}" id="answer{{$index}}" required>
+      <label for="answer{{$index}}">{{$answer}}</label>
+    </div>
+    {{end}}
+    <button type="submit" id="confirmBtn" class="btn-primary">Confirm</button>
+  </form>
+
+  <div id="feedback" style="display: none;">
+    <p id="resultText"></p>
+    <p class="explanation">{{.Question.Explanation}}</p>
+    <button id="nextBtn" class="btn-secondary">Next Question</button>
+  </div>
+</div>
+
+<script>
+  // Timer functionality
+  let timeLeft = {{.TimeLeft}};
+  const timerElement = document.getElementById('timer');
+  const timerInterval = setInterval(() => {
+    timeLeft--;
+    timerElement.textContent = timeLeft;
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      window.location.href = '/report';
+    }
+  }, 1000);
+
+  // Form submission
+  document.getElementById('questionForm').onsubmit = function(e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+
+    fetch('/submit', {
+      method: 'POST',
+      body: formData
+    })
+            .then(response => response.json())
+            .then(data => {
+              document.getElementById('confirmBtn').disabled = true;
+              document.getElementById('feedback').style.display = 'block';
+              document.getElementById('resultText').textContent =
+                      data.correct ? '✓ Correct!' : '✗ Incorrect';
+              document.getElementById('resultText').className =
+                      data.correct ? 'correct' : 'incorrect';
+            });
+  };
+
+  document.getElementById('nextBtn').onclick = function() {
+    window.location.href = '/question';
+  };
+</script>
+</body>
+</html>

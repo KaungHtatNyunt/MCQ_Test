@@ -1,0 +1,59 @@
+<!-- templates/report.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Report</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <div class="report-card">
+    <h1>Test Report</h1>
+
+    <div class="score-highlight">
+      Final Score: {{printf "%.1f" .ScorePercentage}}%
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Topic:</span>
+      <span>{{.Topic}}</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Questions Answered:</span>
+      <span>{{.NumQuestions}}</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Correct Answers:</span>
+      <span>{{.CorrectAnswers}} out of {{.NumQuestions}}</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Total Time:</span>
+      <span>{{.TimeTaken.Minutes | printf "%.1f"}} minutes</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Average Time per Question:</span>
+      <span>{{printf "%.1f" .AvgTimePerQ}} minutes</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">Start Time:</span>
+      <span>{{.StartTime.Format "02/01/2006 15:04"}}</span>
+    </div>
+
+    <div class="stat-row">
+      <span class="stat-label">End Time:</span>
+      <span>{{.EndTime.Format "02/01/2006 15:04"}}</span>
+    </div>
+  </div>
+
+  <div class="button-group">
+    <button onclick="window.location.href='/'" class="btn-primary">Start New Test</button>
+    <button onclick="window.print()" class="btn-secondary">Print Report</button>
+  </div>
+</div>
+</body>
+</html>

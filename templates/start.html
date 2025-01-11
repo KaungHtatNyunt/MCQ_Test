@@ -1,0 +1,21 @@
+<!-- templates/start.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MCQ Test</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="container">
+  <h1>MCQ Test</h1>
+  <form method="POST">
+    <div class="form-group">
+      <label>Number of questions:</label>
+      <input type="number" name="num_questions" required min="1" class="form-control">
+      <small class="form-text">You will have 2 minutes per question</small>
+    </div>
+    <button type="submit" class="btn-primary">Start Test</button>
+  </form>
+</div>
+</body>
+</html>
