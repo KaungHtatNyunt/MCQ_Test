@@ -17,7 +17,7 @@ type TestHandler struct {
 
 func NewTestHandler() *TestHandler {
 	return &TestHandler{
-		templates: template.Must(template.ParseGlob("templates/*.html")),
+		templates: template.Must(template.ParseGlob("/opt/render/project/go/src/github.com/KaungHtatNyunt/MCQ_Test/templates/*.html")),
 		sessions:  make(map[string]*models.TestSession),
 	}
 }
@@ -40,7 +40,7 @@ func (h *TestHandler) StartTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	questions, err := utils.LoadQuestionsFromExcel("C:\\Users\\Kaung\\go\\Go_Projects\\mcq-test-system\\MCQ_question.xlsx")
+	questions, err := utils.LoadQuestionsFromExcel("/opt/render/project/go/src/github.com/KaungHtatNyunt/MCQ_Test/MCQ_question.xlsx")
 	if err != nil {
 		http.Error(w, "Failed to load questions", http.StatusInternalServerError)
 		return
