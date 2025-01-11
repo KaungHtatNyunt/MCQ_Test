@@ -40,7 +40,7 @@ func (h *TestHandler) StartTest(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	questions, err := utils.LoadQuestionsFromExcel("/opt/render/project/go/src/github.com/KaungHtatNyunt/MCQ_Test/MCQ_question.xlsx")
+	questions, err := utils.LoadQuestionsFromExcel("/opt/render/project/go/src/github.com/KaungHtatNyunt/MCQ_Test/Formatted_MCQ_Master_20250106.xlsx")
 	if err != nil {
 		http.Error(w, "Failed to load questions", http.StatusInternalServerError)
 		return
