@@ -1,0 +1,12 @@
+# Exported from Render on 2025-01-11T14:10:01Z
+services:
+- type: web
+  name: G9_mcq
+  runtime: go
+  repo: https://github.com/KaungHtatNyunt/MCQ_Test
+  plan: free
+  region: singapore
+  buildCommand: go build -o main
+  startCommand: ./main
+  rootDir: ./cmd
+version: "1"
